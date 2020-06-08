@@ -1,0 +1,36 @@
+<div class="container mt-3">
+  <form #noticiasFrom="ngForm">
+    <div class="form-group row">
+      <label for="categoria" class="col-md-2 col-sm-12">Categor&iacute;a</label>
+      <select name="cmbCategoria" id="cmbCategoria" class="form-control col-md-10 col-sm-12" [(ngModel)]="categoria" #cmbCategoria="ngModel" required>
+        <option value="soccer">Soccer</option>
+        <option value="basketball">Basketball</option>
+        <option value="tennis">Tennis</option>
+      </select>
+      <div *ngIf="cmbCategoria.invalid && (cmbCategoria.dirty || cmbCategoria.touched)" class="alert alert-danger">
+        <div *ngIf="cmbCategoria.errors.required">
+          El campo Categor&iacute;a es requerido
+        </div>
+      </div>
+    </div>
+    <div class="form-group row">
+      <button type="button" class="btn btn-primary" (click)="listarNoticias()" [disabled]="!noticiasFrom.form.valid">Buscar Noticias</button>
+    </div>
+  </form>
+
+  <div class="row">
+    <div class="col-md-6 col-sm-12" *ngFor="let item of noticias">
+      <div class="card mt-2">
+        <img src="{{ item.img }}" alt="..." class="card-img-top">
+        <div class="card-header">
+          <a href="">
+            <h4>{{ item.tit }}</h4>
+          </a>
+        </div>
+        <div class="card-body">
+          <p class="card-text">{{ item.des }}</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
